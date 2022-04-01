@@ -22,31 +22,27 @@ function Datatable() {
 
     // useSelectors & Dispatch epiasData1Items Into EpiasData1 Entity
     const epiasData1Items = useSelector((state) => state.epiasData1.items);
-    epiasData1Items[0] && dispatch(setEpiasData1(epiasData1Items));
+    console.log("epiasData1Items", epiasData1Items)
+    epiasData1Items && dispatch(setEpiasData1(epiasData1Items));
 
     // Calling epiasData1 Entity
     const epiasData1Entity = useSelector(epiasData1Selectors.selectAll)
-
-    // console.log("epiasData1Entity", epiasData1Entity)
-    // console.log("epiasData1Entity[0]", epiasData1Entity[0])
+    epiasData1Items && console.log("epiasData1Entity", epiasData1Entity)
+    epiasData1Items && console.log("epiasData1Entity[0][0]", epiasData1Entity[0][0])
 
     // Table data which will be displayed
-    // const filteredData = epiasData1Entity[0].map((element, index) => {
-    // element .....
-    // conract: "PH22012603"
-    // date: "2022-01-26T00:00:34.000+0300"
-    // id: 444121195
-    // price: 731.99
-    // quantity: 5
-    // let text = element[index].conract
-    // let contractFirstTwoChar = `${text.charAt(0)}${text.charAt(1)}`
-
-    // console.log("element", (element[0]))
-    // console.log("element[index].id", typeof (element.id))
-    // console.log("element[index].id", element.id)
-    // return element
-
-    // })
+    const filteredData = epiasData1Entity[0] && epiasData1Entity[0].map((element, index) => {
+        // element .....
+        // conract: "PH22012603"
+        // date: "2022-01-26T00:00:34.000+0300"
+        // id: 444121195
+        // price: 731.99
+        // quantity: 5
+        let text = element.conract
+        let contractFirstTwoChar = `${text.charAt(0)}${text.charAt(1)}`
+        console.log(contractFirstTwoChar)
+        return element
+    })
 
     // console.log("filteredData", filteredData)
 
