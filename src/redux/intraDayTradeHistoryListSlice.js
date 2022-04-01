@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Paramaters which will be used in api request
-let endDate = "2022-01-26";
-let startDate = "2022-01-26";
+let endDate = "2022-02-08";
+let startDate = "2022-02-07";
 
 // Fetch Api Data
 export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAllList', async (tableItemLimit) => {
@@ -13,31 +13,23 @@ export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAll
     // Limiting Table Data
     let initialItemArray = res.data.body.intraDayTradeHistoryList;
     let finalItemArray = [];
-    for (let i = 0; i < tableItemLimit; i++) {
+    let dataLimit = (tableItemLimit > initialItemArray.length) || tableItemLimit == null ? initialItemArray.length : tableItemLimit
+    console.log("dataLimit", dataLimit)
+    for (let i = 0; i < dataLimit; i++) {
         finalItemArray.push(initialItemArray[i])
     }
 
     return finalItemArray
 })
 
-// Entity Adapter
-let counter = 0;
-export const epiasData1Adaptor = createEntityAdapter({
-    selectId: (entity) => counter + 1,
-})
-
-const initialState = epiasData1Adaptor.getInitialState({
-    items: [],
-    status: 'idle',
-});
-
-export const epiasData1Selectors = epiasData1Adaptor.getSelectors((state) => state.epiasData1);
 
 export const intraDayTradeHistoryListSlice = createSlice({
     name: 'epiasData1',
-    initialState,
-    reducers: {
-        setEpiasData1: epiasData1Adaptor.setOne,
+    initialState: {
+        items: [],
+        status: 'idle',
+    },
+    reducers: { //blank because i have used "createAsyncThunk + extraReducers"
     },
     extraReducers: {
         [fetchEpiasData1.pending]: (state, action) => {
@@ -54,5 +46,4 @@ export const intraDayTradeHistoryListSlice = createSlice({
     },
 });
 
-export const { setEpiasData1 } = intraDayTradeHistoryListSlice.actions;
 export default intraDayTradeHistoryListSlice.reducer;

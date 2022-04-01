@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchEpiasData1, epiasData1Selectors, setEpiasData1 }
+import { fetchEpiasData1 }
     from "../redux/intraDayTradeHistoryListSlice";
 import { Row, Col, Table } from 'react-bootstrap'
 
@@ -9,8 +9,8 @@ function Datatable() {
     const dispatch = useDispatch();
 
     //States
-    const [tableItemLimit, setTableItemLimit] = useState(50)
-    const [conractType, setConractType] = useState("PB")
+    const [tableItemLimit, setTableItemLimit] = useState()
+    const [conractType, setConractType] = useState("PH")
 
     // dispatch The Api Data
     const status = useSelector((state) => state.epiasData1.status);
@@ -20,31 +20,89 @@ function Datatable() {
         }
     }, [dispatch, status, tableItemLimit])
 
-    // useSelectors & Dispatch epiasData1Items Into EpiasData1 Entity
+    // Call & Use Api Data of State
     const epiasData1Items = useSelector((state) => state.epiasData1.items);
     console.log("epiasData1Items", epiasData1Items)
-    epiasData1Items && dispatch(setEpiasData1(epiasData1Items));
+    //1.0 Table data which will be displayed
 
-    // Calling epiasData1 Entity
-    const epiasData1Entity = useSelector(epiasData1Selectors.selectAll)
-    epiasData1Items && console.log("epiasData1Entity", epiasData1Entity)
-    epiasData1Items && console.log("epiasData1Entity[0][0]", epiasData1Entity[0][0])
+    //1.1 Define Unique Conract Values
+    let conractValueArray = epiasData1Items.map((item) => (item.conract))
+    let uniqueConractValueArray = [...new Set(conractValueArray)];
 
-    // Table data which will be displayed
-    const filteredData = epiasData1Entity[0] && epiasData1Entity[0].map((element, index) => {
-        // element .....
-        // conract: "PH22012603"
-        // date: "2022-01-26T00:00:34.000+0300"
-        // id: 444121195
-        // price: 731.99
-        // quantity: 5
-        let text = element.conract
-        let contractFirstTwoChar = `${text.charAt(0)}${text.charAt(1)}`
-        console.log(contractFirstTwoChar)
-        return element
+    let typeFilteredUniqueConractValueArray = uniqueConractValueArray.filter((item) => {
+
+        let contractFirstTwoChar = `${item.charAt(0)}${item.charAt(1)}`
+
+        return contractFirstTwoChar === conractType
     })
 
-    // console.log("filteredData", filteredData)
+
+    // console.log("typeFilteredUniqueConractValueArray", typeFilteredUniqueConractValueArray)
+
+    //1.2 Prepare Functions to define wanted values for a "conract" class and group them
+    // Toplam İşlem Tutarı = (price*quantity)/10 değerlerinin toplamı;
+    // Toplam İşlem Miktarı = İlgili conract’a ait sınıfların quantity/10 değerlerinin toplamı;
+    // Ağırlıklı Ortalama Fiyat = Toplam İşlem Tutarı/Toplam İşlem Miktarı formülü ile hesaplanacaktır.
+
+    // dataGroupedByconractArray
+    let dataGroupedByconractArray = [];
+    typeFilteredUniqueConractValueArray.forEach((wantedConract) => {
+        let filtered = epiasData1Items.filter((element) => {
+            return element.conract === wantedConract
+        })
+        dataGroupedByconractArray.push(filtered)
+    })
+    console.log("dataGroupedByconractArray", dataGroupedByconractArray)
+
+    // PH22020720
+    let dateFormattedTypeFilteredUniqueConractValueArray =
+        typeFilteredUniqueConractValueArray.map((stringItem) => (stringItem.match(/\d\d\d\d\d\d\d\d/g)))
+
+    dateFormattedTypeFilteredUniqueConractValueArray.sort(function (a, b) { return a - b });
+    console.log("test2", dateFormattedTypeFilteredUniqueConractValueArray)
+    // totalQuantityOfTransactionForEachConractArray
+    let totalQuantityOfTransactionForEachConractArray = [];
+    dataGroupedByconractArray.forEach((itemAsArray) => {
+        let totalQuantityForConract = itemAsArray.reduce((previousValue, currentValue) => {
+            // console.log("previousValue", previousValue, "currentValue", currentValue.quantity)
+            return previousValue + currentValue.quantity
+        }, 0)
+        totalQuantityOfTransactionForEachConractArray.push(Math.round(totalQuantityForConract / 10))
+    })
+    console.log("totalQuantityOfTransactionForEachConractArray",
+        totalQuantityOfTransactionForEachConractArray)
+
+    // totalAmountOfTransactionEachConractArray
+    let totalAmountOfTransactionEachConractArray = [];
+    dataGroupedByconractArray.forEach((itemAsArray) => {
+        let totalAmountForConract = itemAsArray.reduce((previousValue, currentValue) => {
+            // console.log("previousValue", previousValue, "currentValue", currentValue.price)
+            return previousValue + (currentValue.price * currentValue.quantity)
+        }, 0)
+        totalAmountOfTransactionEachConractArray.push(Math.round(totalAmountForConract / 10))
+    })
+    console.log("totalAmountOfTransactionEachConractArray",
+        totalAmountOfTransactionEachConractArray)
+
+    // WeightedAveragePrice(TL/MWh)
+    let WeightedAveragePrice_TLdividedMWh = [];
+
+    for (let i = 0; i < dataGroupedByconractArray.length; i++) {
+        WeightedAveragePrice_TLdividedMWh.push
+            (Math.round(totalAmountOfTransactionEachConractArray[i] / totalQuantityOfTransactionForEachConractArray[i]))
+    }
+    console.log("WeightedAveragePrice_TLdividedMWh", (WeightedAveragePrice_TLdividedMWh))
+    // .reduce((previousValue, currentValue) => {
+    //     console.log("test", previousValue.quantit, currentValue.quantity)
+    //     return previousValue.quantity + currentValue.quantity
+    // }, 0)
+    // console.log("totalQuantityOfTransactionForEachConract", totalQuantityOfTransactionForEachConract)
+    // element .....
+    // conract: "PH22012603"
+    // date: "2022-01-26T00:00:34.000+0300"
+    // id: 444121195
+    // price: 731.99
+    // quantity: 5
 
     // Parse date from "conract" object key
     // let dataDate = []
@@ -70,7 +128,7 @@ function Datatable() {
                             <th className="text-center align-middle fs-6">Weighted Average Price (TL/MWh)</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {epiasData1Items.map((item) => (
                             <tr key={item.id}>
                                 <td>{`asd`}</td>
@@ -79,7 +137,7 @@ function Datatable() {
                                 <td>@mdo</td>
                             </tr>
                         ))}
-                    </tbody>
+                    </tbody> */}
                 </Table>
             </Col>
         </Row>
