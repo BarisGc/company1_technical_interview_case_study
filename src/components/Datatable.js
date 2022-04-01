@@ -5,36 +5,57 @@ import { fetchEpiasData1, epiasData1Selectors, setEpiasData1 }
 import { Row, Col, Table } from 'react-bootstrap'
 
 function Datatable() {
-
-    // useSelectors & Dispatch epiasData1Items
+    // Use Some Hooks
     const dispatch = useDispatch();
-    const epiasData1Items = useSelector((state) => state.epiasData1.items);
-    epiasData1Items[0] && dispatch(setEpiasData1(epiasData1Items));
-    const status = useSelector((state) => state.epiasData1.status);
 
     //States
     const [tableItemLimit, setTableItemLimit] = useState(50)
-
-    // Calling epiasData1 Entity
-    const epiasData1Entity = useSelector(epiasData1Selectors.selectAll)
+    const [conractType, setConractType] = useState("PB")
 
     // dispatch The Api Data
+    const status = useSelector((state) => state.epiasData1.status);
     useEffect(() => {
         if (status === 'idle') {
             dispatch(fetchEpiasData1(tableItemLimit));
         }
     }, [dispatch, status, tableItemLimit])
 
-    console.log("epiasData1Entity", epiasData1Entity)
+    // useSelectors & Dispatch epiasData1Items Into EpiasData1 Entity
+    const epiasData1Items = useSelector((state) => state.epiasData1.items);
+    epiasData1Items[0] && dispatch(setEpiasData1(epiasData1Items));
+
+    // Calling epiasData1 Entity
+    const epiasData1Entity = useSelector(epiasData1Selectors.selectAll)
+
+    // console.log("epiasData1Entity", epiasData1Entity)
+    // console.log("epiasData1Entity[0]", epiasData1Entity[0])
 
     // Table data which will be displayed
+    // const filteredData = epiasData1Entity[0].map((element, index) => {
+    // element .....
+    // conract: "PH22012603"
+    // date: "2022-01-26T00:00:34.000+0300"
+    // id: 444121195
+    // price: 731.99
+    // quantity: 5
+    // let text = element[index].conract
+    // let contractFirstTwoChar = `${text.charAt(0)}${text.charAt(1)}`
+
+    // console.log("element", (element[0]))
+    // console.log("element[index].id", typeof (element.id))
+    // console.log("element[index].id", element.id)
+    // return element
+
+    // })
+
+    // console.log("filteredData", filteredData)
 
     // Parse date from "conract" object key
-    let dataDate = []
-    let pattern = /[0-9][0-9]/g
-    let conract = "PH22012606"
-    dataDate = conract.match(pattern)
-    console.log("dataDate", dataDate)
+    // let dataDate = []
+    // let pattern = /[0-9][0-9]/g
+    // let conract = "PH22012606"
+    // dataDate = conract.match(pattern)
+    // console.log("dataDate", dataDate)
 
 
 

@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
-import { useEffect } from "react";
 
 // Paramaters which will be used in api request
 let endDate = "2022-01-26";
@@ -10,7 +8,7 @@ let startDate = "2022-01-26";
 // Fetch Api Data
 export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAllList', async (tableItemLimit) => {
     const res = await axios(`${process.env.REACT_APP_API_ENDPOINT}/transparency/service/market/intra-day-trade-history?endDate=${endDate}&startDate=${startDate}`)
-    console.log("res.data.body.intraDayTradeHistoryList", res.data.body.intraDayTradeHistoryList)
+    // console.log("res.data.body.intraDayTradeHistoryList", res.data.body.intraDayTradeHistoryList)
 
     // Limiting Table Data
     let initialItemArray = res.data.body.intraDayTradeHistoryList;
@@ -18,7 +16,6 @@ export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAll
     for (let i = 0; i < tableItemLimit; i++) {
         finalItemArray.push(initialItemArray[i])
     }
-    console.log("finalItemArray", finalItemArray)
 
     return finalItemArray
 })
