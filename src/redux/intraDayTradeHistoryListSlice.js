@@ -2,19 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Paramaters which will be used in api request
-let endDate = "2022-02-08";
-let startDate = "2022-02-07";
+let endDate = "2022-01-26";
+let startDate = "2022-01-26";
 
 // Fetch Api Data
-export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAllList', async (tableItemLimit) => {
-    const res = await axios(`${process.env.REACT_APP_API_ENDPOINT}/transparency/service/market/intra-day-trade-history?endDate=${endDate}&startDate=${startDate}`)
+export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAllList', async (parameterObject) => {
+
+    const res = await axios(`${process.env.REACT_APP_API_ENDPOINT}/transparency/service/market/intra-day-trade-history?endDate=${parameterObject.endDate}&startDate=${parameterObject.startDate}`)
     // console.log("res.data.body.intraDayTradeHistoryList", res.data.body.intraDayTradeHistoryList)
 
     // Limiting Table Data
     let initialItemArray = res.data.body.intraDayTradeHistoryList;
     let finalItemArray = [];
-    let dataLimit = (tableItemLimit > initialItemArray.length) || tableItemLimit == null ? initialItemArray.length : tableItemLimit
-    console.log("dataLimit", dataLimit)
+    let dataLimit = (parameterObject.tableItemLimit > initialItemArray.length) || parameterObject.tableItemLimit == null ? initialItemArray.length : parameterObject.tableItemLimit
+
+    // console.log("dataLimit", dataLimit)
+
     for (let i = 0; i < dataLimit; i++) {
         finalItemArray.push(initialItemArray[i])
     }

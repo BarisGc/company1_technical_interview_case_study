@@ -21,3 +21,8 @@
     z-index: 99999;
     /* Don't forget this, required for the stickiness */
 }
+
+.datatable .moneyData {
+    display: flex;
+    justify-content: space-between;
+}
