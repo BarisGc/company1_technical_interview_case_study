@@ -1,30 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchEpiasData1 } from "./services";
-// // Paramaters which will be used in api request
-// // let endDate = "2022-01-26";
-// // let startDate = "2022-01-26";
-
-// // Fetch Api Data
-// export const fetchEpiasData1 = createAsyncThunk('intraDayTradeHistoryList/getAllList', async (parameterObject) => {
-
-//     const res = await axios(`https://seffaflik.epias.com.tr/transparency/service/market/intra-day-trade-history?endDate=${parameterObject.endDate}&startDate=${parameterObject.startDate}`)
-//     // console.log("res.data.body.intraDayTradeHistoryList", res.data.body.intraDayTradeHistoryList)
-
-//     // Limiting Table Data
-//     let initialItemArray = res.data.body.intraDayTradeHistoryList;
-//     let finalItemArray = [];
-//     let dataLimit = (parameterObject.tableItemLimit > initialItemArray.length) || parameterObject.tableItemLimit == null ? initialItemArray.length : parameterObject.tableItemLimit
-
-//     // console.log("dataLimit", dataLimit)
-
-//     for (let i = 0; i < dataLimit; i++) {
-//         finalItemArray.push(initialItemArray[i])
-//     }
-
-//     return finalItemArray
-// })
-
 
 export const intraDayTradeHistoryListSlice = createSlice({
     name: 'epiasData1',

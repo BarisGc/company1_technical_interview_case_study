@@ -35,7 +35,7 @@ function Datatable() {
                 }
             ));
         }
-    }, [dispatch, status, tableItemLimit])
+    }, [dispatch, status, tableItemLimit, startDate, endDate])
 
     // Call & Use Api Data of State
     const epiasData1Items = useSelector((state) => state.epiasData1.items);
