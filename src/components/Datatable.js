@@ -17,10 +17,7 @@ function Datatable() {
     // Get Current Date & Format
     // should be >>>>> let endDate = "2022-01-26";
     // should be >>>>> let startDate = "2022-01-26";
-    // var myCurrentDate = new Date(); // 02/04/2022
-    // console.log("myCurrentDate", myCurrentDate)
-    const myCurrentDate = new Date(2022, 0, 1, 10, 33, 30, 0);
-    console.log("secondMycurrentdate", myCurrentDate)
+    var myCurrentDate = new Date(); // 02/04/2022
     var myCurrentDateString = myCurrentDate.getFullYear() + '-' + ('0' + (myCurrentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + myCurrentDate.getDate()).slice(-2); // 2022-04-02
 
     //States
