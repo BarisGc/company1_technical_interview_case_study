@@ -12,11 +12,15 @@ function Datatable() {
     //States
     const [tableItemLimit, setTableItemLimit] = useState()
     const [conractType, setConractType] = useState("PH")
+    const [iSOnlyCurrentDayDate, setIsOnlyCurrentDayDate] = useState(true)
 
     // Get Current Date & Format
     // should be >>>>> let endDate = "2022-01-26";
     // should be >>>>> let startDate = "2022-01-26";
-    var myCurrentDate = new Date(); // 02/04/2022
+    // var myCurrentDate = new Date(); // 02/04/2022
+    // console.log("myCurrentDate", myCurrentDate)
+    const myCurrentDate = new Date(2022, 0, 1, 10, 33, 30, 0);
+    console.log("secondMycurrentdate", myCurrentDate)
     var myCurrentDateString = myCurrentDate.getFullYear() + '-' + ('0' + (myCurrentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + myCurrentDate.getDate()).slice(-2); // 2022-04-02
 
     //States
@@ -48,11 +52,11 @@ function Datatable() {
     let uniqueConractValueArray = [...new Set(conractValueArray)];
 
     // console.log("uniqueConractValueArray", uniqueConractValueArray)
-    let typeFilteredUniqueConractValueArray = uniqueConractValueArray.filter((item) => {
-
-        let contractFirstTwoChar = `${item.charAt(0)}${item.charAt(1)}`
-
-        return contractFirstTwoChar === conractType
+    let typeFilteredUniqueConractValueArray = uniqueConractValueArray.filter((conract) => {
+        //conract: "PH22040506"
+        let contractFirstTwoChar = `${conract.charAt(0)}${conract.charAt(1)}`
+        let getOnlyCurrentDay = `${conract.charAt(6)}${conract.charAt(7)}`
+        return iSOnlyCurrentDayDate ? contractFirstTwoChar === conractType && getOnlyCurrentDay === (myCurrentDateString[8] + myCurrentDateString[9]) : contractFirstTwoChar === conractType
     })
 
     // console.log("typeFilteredUniqueConractValueArray", typeFilteredUniqueConractValueArray)
