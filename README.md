@@ -1,5 +1,5 @@
 # Project Name: *x_company_intern_technical_interview_homework*
-
+https://github.com/BarisGc/Images/blob/main/sample_table_photo.PNG
 ### Project Deployment:
 1) Firstly, you should run server >>>>> <code>x_company_intern_technical_interview_homework\backend> npm start</code>
 2) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
