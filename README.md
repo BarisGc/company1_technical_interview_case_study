@@ -1,7 +1,9 @@
 # Project Name: *xCompany1-Internship-Coding-Task*
 ### Project Deployment:
-1) Firstly, you should run server >>>>> <code>xCompany1-Internship-Coding-Task\backend> npm start</code>
-2) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
+1) Firstly, you should install npm & run server:
+-<code>xCompany1-Internship-Coding-Task\backend> npm i</code>
+-<code>xCompany1-Internship-Coding-Task\backend> npm start</code>
+3) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
 ![alt text](https://github.com/BarisGc/Images/blob/main/sample_table_photo.PNG)
 ### Project Main Goal: 
 - To Get Required Data From API Service of "Enerji Piyasaları İşletme A.Ş." and To List Data in Requested Datatable Format Using React-Redux
