@@ -1,8 +1,8 @@
 # Project Name: *xCompany1-Internship-Coding-Task*
 ### Project Deployment:
-1) Firstly, you should install npm & run server:
--<code>xCompany1-Internship-Coding-Task\backend> npm i</code><br>
--<code>xCompany1-Internship-Coding-Task\backend> npm start</code>
+1) Firstly, you should install npm & run server:<br>
+1.1) <code>xCompany1-Internship-Coding-Task\backend> npm i</code><br>
+1.2) <code>xCompany1-Internship-Coding-Task\backend> npm start</code><br>
 3) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
 ![alt text](https://github.com/BarisGc/Images/blob/main/sample_table_photo.PNG)
 ### Project Main Goal: 
