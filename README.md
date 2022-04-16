@@ -5,7 +5,7 @@
 1.2) <code>xCompany1-Internship-Coding-Task\backend> npm start</code><br>
 3) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
 ### Project Main Goal: 
-- To Get Required Data From API Service of "Enerji Piyasaları İşletme A.Ş." and To List Data in Requested Datatable Format Using React-Redux
+- To Get Required Data From API Service of "Enerji Piyasaları İşletme A.Ş." & To Manage States Using React-Redux & To List Data in Requested Format of Datatable Using React-Bootstrap
 ### Project Sub-Goals:
 - To Experience How to Fix CORS Error During Development (Moesif Origin & CORS Changer Chrome Extension)
 - To Experience How to Fix CORS Error In Production (Building a Proxy Server Using Node.js & Express)
