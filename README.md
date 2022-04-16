@@ -4,7 +4,6 @@
 1.1) <code>xCompany1-Internship-Coding-Task\backend> npm i</code><br>
 1.2) <code>xCompany1-Internship-Coding-Task\backend> npm start</code><br>
 3) Secondly, after server running, click > [Heroku](https://get-epias-apidata-barisd-v2.herokuapp.com/)
-![alt text](https://github.com/BarisGc/Images/blob/main/png/epiasdata_sample_table_image.PNG)
 ### Project Main Goal: 
 - To Get Required Data From API Service of "Enerji Piyasaları İşletme A.Ş." and To List Data in Requested Datatable Format Using React-Redux
 ### Project Sub-Goals:
@@ -23,6 +22,6 @@
 - The Project-Specific Use: Moesif Origin & Cors Changer
 - General Use: React Developer Tools, Redux DevTools, WhatFont, ColorZilla, Page Ruler Redux
 
-
+![alt text](https://github.com/BarisGc/Images/blob/main/png/epiasdata_sample_table_image.PNG)
 
 
