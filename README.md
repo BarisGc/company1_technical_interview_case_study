@@ -1,4 +1,4 @@
-# Project Name: *xCompany1-Internship-Coding-Task*
+# Project Name: *company1_technical_interview_case_study*
 ### Project Deployment:
 1) Firstly, you should install npm & run server:<br>
 1.1) <code>xCompany1-Internship-Coding-Task\backend> npm i</code><br>
