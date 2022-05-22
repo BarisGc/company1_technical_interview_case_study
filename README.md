@@ -1,4 +1,6 @@
 # Project Name: *company1_technical_interview_case_study*
+## Case:
+Please, click > [Document](https://github.com/BarisGc/xCompany1-Internship-Coding-Task/blob/master/Smartpulse%20Internship%20Coding_Task%202022.pdf)
 ### Project Deployment:
 1) Firstly, you should install npm & run server:<br>
 1.1) <code>xCompany1-Internship-Coding-Task\backend> npm i</code><br>
@@ -9,7 +11,6 @@
 ### Project Sub-Goals:
 - To Experience How to Fix CORS Error During Development (Moesif Origin & CORS Changer Chrome Extension)
 - To Experience How to Fix CORS Error In Production (Building a Proxy Server Using Node.js & Express)
-- Click >>>>>  [For Other Sub-Goals](https://github.com/BarisGc/xCompany1-Internship-Coding-Task/blob/master/Smartpulse%20Internship%20Coding_Task%202022.pdf)
 ### Frameworks/Libraries:
 - React, React-Redux, React-Bootstrap, Express, Axios, Numeral
 ### Storage:
